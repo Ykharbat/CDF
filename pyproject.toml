@@ -1,0 +1,54 @@
+
+[tool.poetry]
+name = "csv_extractor"
+version = "1.0.0"
+description = "an extractor of csv files to CDF RAW"
+authors = ["Yazan"]
+
+[tool.ruff]
+select = ["E", "F", "I", "T20"]
+ignore = []
+fixable = ["A", "B", "C", "D", "E", "F", "I"]
+unfixable = []
+
+exclude = [
+    ".git",
+    ".mypy_cache",
+    ".ruff_cache",
+]
+
+line-length = 120
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+target-version = "py310"
+
+[tool.mypy]
+pretty = true
+check_untyped_defs = true
+ignore_missing_imports = false
+disallow_untyped_defs = true
+follow_imports = "normal"
+namespace_packages = true
+explicit_package_bases = true
+show_error_codes = true
+exclude = [
+    "tests/*"
+]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"
+
+[tool.poetry.dev-dependencies]
+pyinstaller = "^6.0"
+macholib = {version = "^1.14", platform = "darwin"}             # Used by pyinstaller pn Mac OS
+pywin32-ctypes = {version = "^0.2.0", platform = "win32"}       # Used by pyinstaller on Windows
+pefile = "^2023.0.0"                                              # Used by pyinstaller on Windows
+
+[tool.poetry.scripts]
+csv_extractor = "csv_extractor.__main__:main"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
